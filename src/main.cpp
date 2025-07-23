@@ -7,112 +7,128 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+// Include the main VEX library for hardware control and competition functions
 #include "vex.h"
+// Include cmath for mathematical functions (e.g., abs, pow, sqrt)
 #include <cmath>
+// Include custom robot configuration header (motors, sensors, etc.)
 #include "robot-config.h"
+// Include intake control logic (intake motors, scoring, etc.)
 #include "intake-control.h"
+// Include drive control logic (drivetrain, joystick mapping, etc.)
 #include "drive-control.h"
+// Include miscellaneous helper functions
 #include "random-functions.h"
+// Include pneumatic control logic (pistons, solenoids, etc.)
 #include "pneumatic-control.h"
+// Include PID setup and control logic for precise movement
 #include "pid-setup.h"
+// Include autonomous routines for competition
 #include "autonomous-programs.h"
+// Include autonomous routine selector logic
 #include "autonomous-selector.h"
 
 using namespace vex;
 
-// A global instance of competition
+// Create a global instance of the competition class to manage match phases
 competition Competition;
 
-
-
+// Pre-autonomous function: runs before autonomous and user control
+// Used to initialize robot and select autonomous routine
 void pre_auton(void) {
-  autonSelector();
+  autonSelector(); // Display and handle autonomous routine selection
 }
 
-
+// Autonomous function: runs during the autonomous period of the match
 void autonomous(void) {
-  PIDDrive drive;
+  PIDDrive drive; // Create a PIDDrive object for precise driving
+  // Select and run the appropriate autonomous routine based on user selection
   switch (autonSelection) {
     case 0:
-      // Red Left
+      // Red Left Autonomous
       void autonomous1();
       break;
     case 1:
-      // Red Right
+      // Red Right Autonomous
       void autonomous2();
       break;
     case 2:
-      // Blue Left
+      // Blue Left Autonomous
       void autonomous3();
       break;
     case 3:
-      // Blue Right
+      // Blue Right Autonomous
       void autonomous4();
       break;
     case 4:
-      // Skills
+      // Skills Autonomous
       void autonomous5();
       break;
     case 5:
-      // Prog Skills
+      // Programming Skills Autonomous
       void autonomous6();
       break;
     case 6:
-      // Test 1
+      // Test Autonomous 1
       void autonomous7();
       break;
     case 7:
-      // Test 2
+      // Test Autonomous 2
       void autonomous8();
       break;
     case 8:
-      // SKIP AUTON
-      // Do nothing, skip autonomous
+      // Skip Autonomous: do nothing
       break;
     default:
+      // If no valid selection, do nothing
       break;
   }
 }
 
-
+// User control function: runs during the driver control period
 void usercontrol(void) {
+  // Optionally display a team logo on the Brain screen
   //Brain.Screen.drawImageFromFile("team-logo.png", 0, 0);
-  printTeamLogo();
+  printTeamLogo(); // Custom function to print the team logo
+
+  // Main driver control loop: runs repeatedly during user control
   while (1) {
-    inputCurve();
-    Controller.ButtonA.pressed(lilWillToggle);
+    inputCurve(); // Apply input curve to joystick for smoother driving
+
+    // Map controller buttons to intake functions
+    Controller.ButtonA.pressed(lilWillToggle); // Toggle a mechanism with Button A
+
+    // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
-      intakeScoreTop();
+      intakeScoreTop(); // Score in the top goal
     } else if (Controller.ButtonR2.pressing()) {
-      (intakeScoreMiddle)();
+      (intakeScoreMiddle)(); // Score in the middle goal
     } else if (Controller.ButtonB.pressing()) {
-      (intakeScoreBottom());
+      (intakeScoreBottom()); // Score in the bottom goal
     } else if (Controller.ButtonL1.pressing()) {
-      (intakeStore)();
+      (intakeStore)(); // Store game elements
     } else if (Controller.ButtonL2.pressing()) {
-      (intakeChamberLoad)();
+      (intakeChamberLoad)(); // Load chamber
     } else {
-      stopIntake();
+      stopIntake(); // Stop intake if no buttons are pressed
     }
     
-    
-
-
+    // Wait 20 milliseconds to prevent wasted CPU resources
     wait(20, msec); // Sleep the task for a short amount of time to prevent wasted resources.
   }
 }
 
-
+// Main function: entry point for the program
 int main() {
   // Set up callbacks for autonomous and driver control periods.
-  Competition.autonomous(autonomous);
-  Competition.drivercontrol(usercontrol);
+  Competition.autonomous(autonomous); // Register autonomous function
+  Competition.drivercontrol(usercontrol); // Register user control function
 
-  // Run the pre-autonomous function.
+  // Run the pre-autonomous function (setup and auton selection)
   pre_auton();
 
-  // Prevent main from exiting with an infinite loop.
+  // Prevent main from exiting by running an infinite loop
   while (true) {
-    wait(100, msec);
+    wait(100, msec); // Sleep to save resources
   }
 }
