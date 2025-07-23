@@ -3,7 +3,7 @@
 #include "robot-config.h"
 #include <cmath>
 
-// PID control for driving forward/backward and turning using all drivetrain motors
+// PIDDrive class: Implements PID control for driving straight and turning
 class PIDDrive {
 public:
     PIDDrive()
@@ -150,6 +150,7 @@ public:
     }
 
 private:
+    // References to drivetrain motors for direct control
     vex::motor& leftA;
     vex::motor& leftB;
     vex::motor& leftC;

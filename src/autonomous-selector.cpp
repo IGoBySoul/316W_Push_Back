@@ -1,11 +1,16 @@
 #include "autonomous-selector.h"
 
+// Global variable to store selected autonomous routine index
 int autonSelection = 0;
+// Array of autonomous routine names for display
 const char* autonNames[9] = {
   "Red Left", "Red Right", "Blue Left", "Blue Right",
   "Skills", "Prog Skills", "Test 1", "Test 2", "SKIP AUTON"
 };
 
+// drawAutonSelector
+// Draws the autonomous routine selection UI on the Brain screen.
+// Highlights the selected routine and displays a confirm button.
 void drawAutonSelector() {
   Brain.Screen.clearScreen();
   Brain.Screen.setFont(mono20);
@@ -48,6 +53,9 @@ void drawAutonSelector() {
   Brain.Screen.printAt(confirmX + 120, confirmY + confirmH + 25, autonNames[autonSelection]);
 }
 
+// autonSelector
+// Handles user input for selecting an autonomous routine.
+// Waits for user to tap a routine and confirm selection.
 void autonSelector() {
   drawAutonSelector();
   int xOffset = 10;

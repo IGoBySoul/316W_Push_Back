@@ -1,7 +1,9 @@
 #include "robot-config.h"
 
+// Team color variable: 0 = white, 1 = red, 2 = blue, 3 = yellow
 int teamColor = 0;
 
+// Prints a stylized team logo to the Brain screen with color based on teamColor
 void printTeamLogo() {
   if (teamColor == 0) {
     Brain.Screen.setPenColor(white);
@@ -19,6 +21,7 @@ void printTeamLogo() {
 
   Brain.Screen.clearScreen();
   Brain.Screen.setCursor(3, 1);
+  // ASCII art logo, each line printed and advanced
   Brain.Screen.print("   .d8888b.   d888   .d8888b.    888       888   "); Brain.Screen.newLine();
   Brain.Screen.print("  d88P  Y88b d8888  d88P  Y88b   888   o   888   "); Brain.Screen.newLine();
   Brain.Screen.print("       .d88P   888  888          888  d8b  888   "); Brain.Screen.newLine();

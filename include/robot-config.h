@@ -6,7 +6,7 @@ extern brain Brain;
 // VEXcode devices
 extern controller Controller;
 
-//Drivetrain Motors
+// Drivetrain Motors (individual and grouped)
 extern motor leftMotorA;
 extern motor leftMotorB;
 extern motor leftMotorC;
@@ -22,7 +22,7 @@ extern motor IntakeMotor1;
 extern motor IntakeMotor2;
 extern motor IntakeMotor3;
 
-//Pneumatics
+// Pneumatics (digital output for piston/solenoid)
 extern digital_out lilWill;
 
 //Sensors

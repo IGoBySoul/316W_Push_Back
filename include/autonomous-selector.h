@@ -4,12 +4,13 @@
 
 using namespace vex;
 
-// Autonomous selector variables
+// Index of selected autonomous routine (extern for global use)
 extern int autonSelection;
+// Array of autonomous routine names (extern for global use)
 extern const char* autonNames[9];
 
-// Draw 9 buttons for autonomous selection
+// Draws the autonomous selector UI on the Brain screen
 void drawAutonSelector();
 
-// Wait for user to select autonomous
+// Waits for user to select and confirm autonomous routine
 void autonSelector();
