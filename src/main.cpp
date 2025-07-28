@@ -87,32 +87,30 @@ void autonomous(void) {
 
 // User control function: runs during the driver control period
 void usercontrol(void) {
-  // Optionally display a team logo on the Brain screen
-  //Brain.Screen.drawImageFromFile("team-logo.png", 0, 0);
-  printTeamLogo(); // Custom function to print the team logo
+  printTeamLogo();
 
   // Main driver control loop: runs repeatedly during user control
   while (1) {
     inputCurve(); // Apply input curve to joystick for smoother driving
 
     // Map controller buttons to intake functions
-    Controller.ButtonA.pressed(lilWillToggle); // Toggle a mechanism with Button A
+    Controller.ButtonA.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
 
     // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
       intakeScoreTop(); // Score in the top goal
     } else if (Controller.ButtonR2.pressing()) {
-      (intakeScoreMiddle)(); // Score in the middle goal
+      intakeScoreMiddle(); // Score in the middle goal
     } else if (Controller.ButtonB.pressing()) {
-      (intakeScoreBottom()); // Score in the bottom goal
+      intakeScoreBottom(); // Score in the bottom goal
     } else if (Controller.ButtonL1.pressing()) {
-      (intakeStore)(); // Store game elements
+      intakeStore(); // Store game elements
     } else if (Controller.ButtonL2.pressing()) {
-      (intakeChamberLoad)(); // Load chamber
+      intakeChamberLoad(); // Load chamber
     } else {
       stopIntake(); // Stop intake if no buttons are pressed
     }
-    
+
     // Wait 20 milliseconds to prevent wasted CPU resources
     wait(20, msec); // Sleep the task for a short amount of time to prevent wasted resources.
   }

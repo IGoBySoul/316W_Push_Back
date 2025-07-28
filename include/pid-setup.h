@@ -2,6 +2,7 @@
 #include "vex.h"
 #include "robot-config.h"
 #include <cmath>
+#include <array>
 
 // PIDDrive class: Implements PID control for driving straight and turning
 // This class provides two main functions:
@@ -9,10 +10,9 @@
 //   - turnTo(targetAngle): Turns the robot to a specified angle using PID control and the inertial sensor
 class PIDDrive {
 public:
-    // Constructor: Initializes references to the drivetrain motors
     PIDDrive()
-        : leftA(leftMotorA), leftB(leftMotorB), leftC(leftMotorC),
-          rightA(rightMotorA), rightB(rightMotorB), rightC(rightMotorC) {}
+        : leftMotors{&leftMotorA, &leftMotorB, &leftMotorC},
+          rightMotors{&rightMotorA, &rightMotorB, &rightMotorC} {}
 
     // Drive a target distance (in inches), positive = forward, negative = backward
     // Uses PID control to move the robot accurately
@@ -33,12 +33,8 @@ public:
         int targetDegrees = static_cast<int>((targetInches / wheelCircumference) * 360.0);
 
         // Reset all drive motor encoders to zero
-        leftA.resetPosition();
-        leftB.resetPosition();
-        leftC.resetPosition();
-        rightA.resetPosition();
-        rightB.resetPosition();
-        rightC.resetPosition();
+        for (auto m : leftMotors) m->resetPosition();
+        for (auto m : rightMotors) m->resetPosition();
 
         // Initialize PID variables
         double error = 0, prevError = 0, integral = 0, derivative = 0;
@@ -50,9 +46,12 @@ public:
         // Main PID loop
         while (true) {
             // Calculate average encoder position for left and right sides
-            int leftPos = (leftA.position(vex::degrees) + leftB.position(vex::degrees) + leftC.position(vex::degrees)) / 3;
-            int rightPos = (rightA.position(vex::degrees) + rightB.position(vex::degrees) + rightC.position(vex::degrees)) / 3;
-            int avgPos = (leftPos + rightPos) / 2;
+            double leftPos = 0, rightPos = 0;
+            for (auto m : leftMotors) leftPos += m->position(vex::degrees);
+            for (auto m : rightMotors) rightPos += m->position(vex::degrees);
+            leftPos /= leftMotors.size();
+            rightPos /= rightMotors.size();
+            double avgPos = (leftPos + rightPos) / 2.0;
 
             // PID calculations
             error = targetDegrees - avgPos;      // How far we are from the target
@@ -73,12 +72,8 @@ public:
             double rightOutput = output - headingCorrection;
 
             // Set motor speeds
-            leftA.spin(vex::forward, leftOutput, vex::percent);
-            leftB.spin(vex::forward, leftOutput, vex::percent);
-            leftC.spin(vex::forward, leftOutput, vex::percent);
-            rightA.spin(vex::forward, rightOutput, vex::percent);
-            rightB.spin(vex::forward, rightOutput, vex::percent);
-            rightC.spin(vex::forward, rightOutput, vex::percent);
+            for (auto m : leftMotors) m->spin(vex::forward, leftOutput, vex::percent);
+            for (auto m : rightMotors) m->spin(vex::forward, rightOutput, vex::percent);
 
             // Exit conditions: close enough to target or timeout
             if (abs(error) < 5) break; // within 5 degrees of target
@@ -88,12 +83,8 @@ public:
             vex::task::sleep(20); // Wait 20ms between PID updates
         }
         // Stop all drive motors at the end of the move
-        leftA.stop();
-        leftB.stop();
-        leftC.stop();
-        rightA.stop();
-        rightB.stop();
-        rightC.stop();
+        for (auto m : leftMotors) m->stop();
+        for (auto m : rightMotors) m->stop();
     }
 
     // PID turn to a target angle (degrees) using the inertial sensor
@@ -110,12 +101,8 @@ public:
 
         // Reset sensors and encoders
         InertialSensor.resetRotation();
-        leftA.resetPosition();
-        leftB.resetPosition();
-        leftC.resetPosition();
-        rightA.resetPosition();
-        rightB.resetPosition();
-        rightC.resetPosition();
+        for (auto m : leftMotors) m->resetPosition();
+        for (auto m : rightMotors) m->resetPosition();
 
         // Initialize PID variables
         double error = 0, prevError = 0, integral = 0, derivative = 0;
@@ -130,8 +117,12 @@ public:
             double output = kP * error + kI * integral + kD * derivative; // PID output
 
             // Encoder feedback for symmetry (keeps both sides turning equally)
-            double leftAvg = (leftA.position(vex::degrees) + leftB.position(vex::degrees) + leftC.position(vex::degrees)) / 3.0;
-            double rightAvg = (rightA.position(vex::degrees) + rightB.position(vex::degrees) + rightC.position(vex::degrees)) / 3.0;
+            double leftAvg = 0, rightAvg = 0;
+            for (auto m : leftMotors) leftAvg += m->position(vex::degrees);
+            for (auto m : rightMotors) rightAvg += m->position(vex::degrees);
+            leftAvg /= leftMotors.size();
+            rightAvg /= rightMotors.size();
+
             double encoderError = leftAvg + rightAvg; // Should be near zero if both sides turn equally (opposite directions)
             double encoderCorrection = encoderKp * encoderError;
 
@@ -145,12 +136,8 @@ public:
             if (rightOutput < -maxSpeed) rightOutput = -maxSpeed;
 
             // Left side spins forward, right side spins reverse for turning
-            leftA.spin(vex::forward, leftOutput, vex::percent);
-            leftB.spin(vex::forward, leftOutput, vex::percent);
-            leftC.spin(vex::forward, leftOutput, vex::percent);
-            rightA.spin(vex::reverse, rightOutput, vex::percent);
-            rightB.spin(vex::reverse, rightOutput, vex::percent);
-            rightC.spin(vex::reverse, rightOutput, vex::percent);
+            for (auto m : leftMotors) m->spin(vex::forward, leftOutput, vex::percent);
+            for (auto m : rightMotors) m->spin(vex::reverse, rightOutput, vex::percent);
 
             // Exit conditions: close enough to target or timeout
             if (fabs(error) < 1.0) break; // within 1 degree of target
@@ -160,21 +147,11 @@ public:
             vex::task::sleep(20); // Wait 20ms between PID updates
         }
         // Stop all drive motors at the end of the turn
-        leftA.stop();
-        leftB.stop();
-        leftC.stop();
-        rightA.stop();
-        rightB.stop();
-        rightC.stop();
+        for (auto m : leftMotors) m->stop();
+        for (auto m : rightMotors) m->stop();
     }
 
 private:
-    // References to drivetrain motors for direct control
-    // These are set to the actual motor objects defined in robot-config.h
-    vex::motor& leftA;
-    vex::motor& leftB;
-    vex::motor& leftC;
-    vex::motor& rightA;
-    vex::motor& rightB;
-    vex::motor& rightC;
+    std::array<vex::motor*, 3> leftMotors;
+    std::array<vex::motor*, 3> rightMotors;
 };
