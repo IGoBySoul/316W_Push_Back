@@ -3,10 +3,7 @@
 motor* intakeMotors[] = { &IntakeMotor1, &IntakeMotor2, &IntakeMotor3 };
 const int intakeMotorCount = 3;
 
-// Default speeds for each intake motor (all set to 100%)
 int intakeMotorSpeeds[3] = {100, 100, 100};
-
-// Helper to spin selected motors with individual speeds
 void spinIntakes(const int dirs[3], const int speeds[3]) {
   for (int i = 0; i < intakeMotorCount; ++i) {
     if (dirs[i] != 0)
