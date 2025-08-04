@@ -85,31 +85,50 @@ void autonomous(void) {
   }
 }
 
+
+
+/*void turn180() {
+  Brain.Timer.clear();
+  Drivetrain.turnFor(260, deg);
+  double TimerValue = Brain.Timer.time();
+  Brain.Screen.print(TimerValue);
+} */
+
+
 // User control function: runs during the driver control period
 void usercontrol(void) {
   printTeamLogo();
+  Drivetrain.setStopping(brake);
+  Drivetrain.setTurnVelocity(100, percent);
+
 
   // Main driver control loop: runs repeatedly during user control
   while (1) {
     inputCurve(); // Apply input curve to joystick for smoother driving
 
     // Map controller buttons to intake functions
-    Controller.ButtonA.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
+    Controller.ButtonY.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
 
     // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
       intakeScoreTop(); // Score in the top goal
     } else if (Controller.ButtonR2.pressing()) {
       intakeScoreMiddle(); // Score in the middle goal
-    } else if (Controller.ButtonB.pressing()) {
+    } else if (Controller.ButtonL2.pressing()) {
       intakeScoreBottom(); // Score in the bottom goal
     } else if (Controller.ButtonL1.pressing()) {
       intakeStore(); // Store game elements
-    } else if (Controller.ButtonL2.pressing()) {
+    } else if (Controller.ButtonDown.pressing()) {
       intakeChamberLoad(); // Load chamber
+    } else if (Controller.ButtonB.pressing()) {
+      intakeScoreMiddleSlow();
     } else {
-      stopIntake(); // Stop intake if no buttons are pressed
+      intakeStop(); // Stop intake if no buttons are pressed
     }
+
+    /*if (Controller.ButtonA.pressing()) {
+      turn180();
+    }*/
 
     // Wait 20 milliseconds to prevent wasted CPU resources
     wait(20, msec); // Sleep the task for a short amount of time to prevent wasted resources.
