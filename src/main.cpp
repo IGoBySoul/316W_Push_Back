@@ -100,6 +100,9 @@ void usercontrol(void) {
   printTeamLogo();
   Drivetrain.setStopping(brake);
   Drivetrain.setTurnVelocity(100, percent);
+  IntakeMotor1.setStopping(brake);
+  IntakeMotor1.setStopping(brake);
+  IntakeMotor1.setStopping(brake);
 
 
   // Main driver control loop: runs repeatedly during user control
