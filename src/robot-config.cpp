@@ -28,8 +28,8 @@ drivetrain Drivetrain = drivetrain(LeftDrive, RightDrive, 319.19, 295, 40, mm, 1
 // Intake Motors
 // Three motors for intake and scoring mechanisms
 motor IntakeMotor1 = motor(PORT15, ratio18_1, true);    // Main intake roller
-motor IntakeMotor2 = motor(PORT14, ratio18_1, false);   // Secondary intake
-motor IntakeMotor3 = motor(PORT20, ratio6_1, true);    // Chamber/roller
+motor IntakeMotor2 = motor(PORT14, ratio18_1, true);   // Secondary intake
+motor IntakeMotor3 = motor(PORT20, ratio6_1, false);    // Chamber/roller
 
 // Pneumatics
 // Digital output for controlling pneumatic piston/solenoid

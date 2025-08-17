@@ -100,9 +100,9 @@ void usercontrol(void) {
   printTeamLogo();
   Drivetrain.setStopping(brake);
   Drivetrain.setTurnVelocity(100, percent);
-  IntakeMotor1.setStopping(brake);
-  IntakeMotor1.setStopping(brake);
-  IntakeMotor1.setStopping(brake);
+  IntakeMotor1.setStopping(hold);
+  IntakeMotor2.setStopping(hold);
+  IntakeMotor3.setStopping(hold);
 
 
   // Main driver control loop: runs repeatedly during user control
@@ -115,16 +115,16 @@ void usercontrol(void) {
     // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
       intakeScoreTop(); // Score in the top goal
-    } else if (Controller.ButtonR2.pressing()) {
+    } else if (Controller.ButtonL1.pressing()) {
       intakeScoreMiddle(); // Score in the middle goal
     } else if (Controller.ButtonL2.pressing()) {
       intakeScoreBottom(); // Score in the bottom goal
-    } else if (Controller.ButtonL1.pressing()) {
+    } else if (Controller.ButtonR2.pressing()) {
       intakeStore(); // Store game elements
     } else if (Controller.ButtonDown.pressing()) {
       intakeChamberLoad(); // Load chamber
     } else if (Controller.ButtonB.pressing()) {
-      intakeScoreMiddleSlow();
+      intakeOuttake();
     } else {
       intakeStop(); // Stop intake if no buttons are pressed
     }
