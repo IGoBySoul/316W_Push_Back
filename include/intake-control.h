@@ -30,7 +30,9 @@ void intakeScoreBottom() {
 
 // Spins intake motors to score in the middle goal
 void intakeScoreMiddle() {
-  for (int i = 0; i < intakeMotorCount; ++i) intakeMotorSpeeds[i] = 100;
+  intakeMotorSpeeds[0] = 35;
+  intakeMotorSpeeds[1] = 12.5;
+  intakeMotorSpeeds[2] = 100;
   int dirs[3] = {1, -1, -1};
   spinIntakes(dirs, intakeMotorSpeeds);
 }
