@@ -68,4 +68,5 @@ void autonomous7() {  //test1
 
 // Autonomous routine for Test 2
 void autonomous8() {  //test2
+    Brain.Screen.printAt(10, 10, "auton running!");
 }

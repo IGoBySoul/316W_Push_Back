@@ -18,7 +18,7 @@ public:
     // Uses PID control to move the robot accurately
     void driveTo(double targetInches) {
         // --- PID Constants ---
-        double kP = 0.2;        // Proportional gain: Controls how strongly the robot reacts to error
+        double kP = 1.0;        // Proportional gain: Controls how strongly the robot reacts to error
         double kI = 0.0;        // Integral gain: Helps eliminate steady-state error (set to 0 unless needed)
         double kD = 0.05;       // Derivative gain: Dampens oscillations and overshoot
         double headingKp = 1.0; // Heading correction gain: Keeps the robot driving straight
