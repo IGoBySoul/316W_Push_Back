@@ -46,35 +46,35 @@ void autonomous(void) {
   switch (autonSelection) {
     case 0:
       // Red Left Autonomous
-      void autonomous1();
+      autonomous1();
       break;
     case 1:
       // Red Right Autonomous
-      void autonomous2();
+      autonomous2();
       break;
     case 2:
       // Blue Left Autonomous
-      void autonomous3();
+      autonomous3();
       break;
     case 3:
       // Blue Right Autonomous
-      void autonomous4();
+      autonomous4();
       break;
     case 4:
       // Skills Autonomous
-      void autonomous5();
+      autonomous5();
       break;
     case 5:
       // Programming Skills Autonomous
-      void autonomous6();
+      autonomous6();
       break;
     case 6:
       // Test Autonomous 1
-      void autonomous7();
+      autonomous7();
       break;
     case 7:
       // Test Autonomous 2
-      void autonomous8();
+      autonomous8();
       break;
     case 8:
       // Skip Autonomous: do nothing
