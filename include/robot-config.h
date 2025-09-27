@@ -24,6 +24,8 @@ extern motor IntakeMotor3;
 
 // Pneumatics (digital output for piston/solenoid)
 extern digital_out lilWill;
+extern digital_out alligner;
+extern digital_out pusher;
 
 //Sensors
 extern inertial InertialSensor;

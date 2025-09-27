@@ -48,6 +48,44 @@ void autonomous3() { //blueLeft
 
 // Autonomous routine for Blue Right start position
 void autonomous4() { //blueRight
+    drive.driveTo(30);
+    wait(50, msec);
+    Drivetrain.turnFor(32.5, deg);
+    intakeStore();
+    wait(50, msec);
+    drive.driveTo(18, 15);
+    wait(250, msec);
+    intakeStop();
+    Drivetrain.turnFor(-78, deg);
+    drive.driveTo(14, 20);
+    intakeScoreBottom();
+    wait(1000, msec);
+    intakeStop();
+    drive.driveTo(-45);
+    wait(50, msec);
+    Drivetrain.turnFor(-131, deg);
+    wait(50, msec);
+    lilWillToggle();
+    intakeStore();
+    wait(50, msec);
+    Drivetrain.setDriveVelocity(35, pct);
+    Drivetrain.drive(forward);
+    wait(750, msec);
+    Drivetrain.stop();
+    wait(500, msec);
+    intakeStop();
+    
+    drive.driveTo(-20, 45);
+    wait(50, msec);
+    lilWillToggle();
+    Drivetrain.turnFor(180, deg);
+    allignerToggle();
+    Drivetrain.drive(forward);
+    wait(500, msec);
+    Drivetrain.stop();
+    intakeScoreTop();
+    wait(2000, msec);
+    intakeStop();
 }
 
 // Autonomous routine for Skills challenge
@@ -68,5 +106,5 @@ void autonomous7() {  //test1
 
 // Autonomous routine for Test 2
 void autonomous8() {  //test2
-    Brain.Screen.printAt(10, 10, "auton running!");
+    drive.turnTo(90);
 }

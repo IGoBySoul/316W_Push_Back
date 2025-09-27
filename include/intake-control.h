@@ -23,23 +23,23 @@ void intakeStore() {
 
 // Spins intake motors to score in the bottom goal
 void intakeScoreBottom() {
-  for (int i = 0; i < intakeMotorCount; ++i) intakeMotorSpeeds[i] = 100;
+  for (int i = 0; i < intakeMotorCount; ++i) intakeMotorSpeeds[i] = 60;
   int dirs[3] = {-1, 0, -1};
   spinIntakes(dirs, intakeMotorSpeeds);
 }
 
 // Spins intake motors to score in the middle goal
 void intakeScoreMiddle() {
-  intakeMotorSpeeds[0] = 35;
-  intakeMotorSpeeds[1] = 12.5;
-  intakeMotorSpeeds[2] = 100;
+  intakeMotorSpeeds[0] = 50;
+  intakeMotorSpeeds[1] = 50;
+  intakeMotorSpeeds[2] = 50;
   int dirs[3] = {1, -1, -1};
   spinIntakes(dirs, intakeMotorSpeeds);
 }
 
 void intakeOuttake() {
   for (int i = 0; i < intakeMotorCount; ++i) intakeMotorSpeeds[i] = 100;
-  int dirs[3] = {-1, 0, 0};
+  int dirs[3] = {-1, 1, 1};
   spinIntakes(dirs, intakeMotorSpeeds);
 }
 

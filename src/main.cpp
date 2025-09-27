@@ -41,40 +41,41 @@ void pre_auton(void) {
 
 // Autonomous function: runs during the autonomous period of the match
 void autonomous(void) {
+  Drivetrain.setTurnVelocity(25, pct);
   PIDDrive drive; // Create a PIDDrive object for precise driving
   // Select and run the appropriate autonomous routine based on user selection
   switch (autonSelection) {
     case 0:
       // Red Left Autonomous
-      void autonomous1();
+      autonomous1();
       break;
     case 1:
       // Red Right Autonomous
-      void autonomous2();
+      autonomous2();
       break;
     case 2:
       // Blue Left Autonomous
-      void autonomous3();
+      autonomous3();
       break;
     case 3:
       // Blue Right Autonomous
-      void autonomous4();
+      autonomous4();
       break;
     case 4:
       // Skills Autonomous
-      void autonomous5();
+      autonomous5();
       break;
     case 5:
       // Programming Skills Autonomous
-      void autonomous6();
+      autonomous6();
       break;
     case 6:
       // Test Autonomous 1
-      void autonomous7();
+      autonomous7();
       break;
     case 7:
       // Test Autonomous 2
-      void autonomous8();
+      autonomous8();
       break;
     case 8:
       // Skip Autonomous: do nothing
@@ -111,6 +112,8 @@ void usercontrol(void) {
 
     // Map controller buttons to intake functions
     Controller.ButtonY.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
+    Controller.ButtonRight.pressed(allignerToggle);
+    Controller.ButtonDown.pressed(pusherToggle);
 
     // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
@@ -121,8 +124,6 @@ void usercontrol(void) {
       intakeScoreBottom(); // Score in the bottom goal
     } else if (Controller.ButtonR2.pressing()) {
       intakeStore(); // Store game elements
-    } else if (Controller.ButtonDown.pressing()) {
-      intakeChamberLoad(); // Load chamber
     } else if (Controller.ButtonB.pressing()) {
       intakeOuttake();
     } else {
