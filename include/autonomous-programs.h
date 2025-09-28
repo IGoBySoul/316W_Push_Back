@@ -50,11 +50,11 @@ void autonomous3() { //blueLeft
 void autonomous4() { //blueRight
     drive.driveTo(30);
     wait(50, msec);
-    Drivetrain.turnFor(32.5, deg);
+    Drivetrain.turnFor(30, deg);
     intakeStore();
     wait(50, msec);
     drive.driveTo(18, 15);
-    wait(250, msec);
+    wait(150, msec);
     intakeStop();
     Drivetrain.turnFor(-78, deg);
     drive.driveTo(14, 20);
@@ -63,7 +63,7 @@ void autonomous4() { //blueRight
     intakeStop();
     drive.driveTo(-45);
     wait(50, msec);
-    Drivetrain.turnFor(-131, deg);
+    Drivetrain.turnFor(-127.5, deg);
     wait(50, msec);
     lilWillToggle();
     intakeStore();
@@ -73,13 +73,14 @@ void autonomous4() { //blueRight
     wait(750, msec);
     Drivetrain.stop();
     wait(500, msec);
+    drive.driveTo(-20, 45);
     intakeStop();
     
-    drive.driveTo(-20, 45);
     wait(50, msec);
     lilWillToggle();
-    Drivetrain.turnFor(180, deg);
     allignerToggle();
+    Drivetrain.turnFor(-177.5, deg);
+    wait(50, msec);
     Drivetrain.drive(forward);
     wait(500, msec);
     Drivetrain.stop();
