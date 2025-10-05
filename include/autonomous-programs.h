@@ -68,7 +68,7 @@ void autonomous3() { //rightHighScore
     Drivetrain.drive(forward);
     wait(825, msec);
     Drivetrain.stop();
-    wait(400, msec);
+    wait(350, msec);
     intakeStop();
     drive.driveTo(-20, 45);
     
@@ -76,11 +76,15 @@ void autonomous3() { //rightHighScore
     lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(-200, deg);
+    Drivetrain.turnFor(-190, deg);
     wait(50, msec);
     Drivetrain.drive(forward);
     wait(400, msec);
     Drivetrain.stop();
+    intakeScoreTop();
+    wait(1000, msec);
+    intakeStop();
+    wait(350, msec);
     intakeScoreTop();
     wait(2500, msec);
     intakeStop();
@@ -115,7 +119,7 @@ void autonomous4() { //rightAWP
     Drivetrain.drive(forward);
     wait(900, msec);
     Drivetrain.stop();
-    wait(350, msec);
+    wait(400, msec);
     intakeStop();
     drive.driveTo(-20, 45);
     
@@ -123,15 +127,11 @@ void autonomous4() { //rightAWP
     lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(-180, deg);
+    Drivetrain.turnFor(-187, deg);
     wait(50, msec);
     Drivetrain.drive(forward);
     wait(400, msec);
     Drivetrain.stop();
-    intakeScoreTop();
-    wait(750, msec);
-    intakeStop();
-    wait(350, msec);
     intakeScoreTop();
     wait(2000, msec);
     intakeStop();
