@@ -28,13 +28,13 @@ void autonomous1() { //soloAWPleft
     drive.driveTo(16);
     intakeScoreBottom();
     wait(500, msec);
-    intakeStop;
+    intakeStop();
     drive.driveTo(-50);
     drive.turnTo(45);
     drive.driveTo(22);
     intakeScoreTop();
     wait(10000, msec);
-    intakeStop;
+    intakeStop();
 }
 
 // Autonomous routine for Red Right start position
@@ -43,11 +43,7 @@ void autonomous2() { //redRight
 }
 
 // Autonomous routine for Blue Left start position
-void autonomous3() { //blueLeft
-}
-
-// Autonomous routine for Blue Right start position
-void autonomous4() { //blueRight
+void autonomous3() { //rightHighScore
     drive.driveTo(30);
     wait(50, msec);
     Drivetrain.turnFor(30, deg);
@@ -55,35 +51,87 @@ void autonomous4() { //blueRight
     wait(50, msec);
     drive.driveTo(18, 15);
     wait(150, msec);
+    drive.driveTo(-4, 20);
     intakeStop();
-    Drivetrain.turnFor(-78, deg);
-    drive.driveTo(14, 20);
-    intakeScoreBottom();
-    wait(1000, msec);
-    intakeStop();
-    drive.driveTo(-45);
     wait(50, msec);
-    Drivetrain.turnFor(-127.5, deg);
+    Drivetrain.turnFor(85, deg);
+    wait(50, msec);
+
+    drive.driveTo(38, 55);
+    wait(50, msec);
+    Drivetrain.turnFor(37.5, deg);
     wait(50, msec);
     lilWillToggle();
     intakeStore();
     wait(50, msec);
-    Drivetrain.setDriveVelocity(35, pct);
+    Drivetrain.setDriveVelocity(25, pct);
     Drivetrain.drive(forward);
-    wait(750, msec);
+    wait(825, msec);
     Drivetrain.stop();
-    wait(500, msec);
-    drive.driveTo(-20, 45);
+    wait(400, msec);
     intakeStop();
+    drive.driveTo(-20, 45);
     
     wait(50, msec);
     lilWillToggle();
     allignerToggle();
-    Drivetrain.turnFor(-177.5, deg);
+    Drivetrain.setDriveVelocity(30, pct);
+    Drivetrain.turnFor(-200, deg);
     wait(50, msec);
     Drivetrain.drive(forward);
-    wait(500, msec);
+    wait(400, msec);
     Drivetrain.stop();
+    intakeScoreTop();
+    wait(2500, msec);
+    intakeStop();
+}
+
+// Autonomous routine for Blue Right start position
+void autonomous4() { //rightAWP
+    drive.driveTo(30);
+    wait(50, msec);
+    Drivetrain.turnFor(30, deg);
+    intakeStore();
+    wait(50, msec);
+    drive.driveTo(18, 15);
+    wait(150, msec);
+    drive.driveTo(-4, 20);
+    intakeStop();
+    wait(50, msec);
+    Drivetrain.turnFor(-70, deg);
+    wait(50, msec);
+    drive.driveTo(15, 20);
+    intakeScoreBottom();
+    wait(1000, msec);
+    intakeStop();
+    drive.driveTo(-51, 55);
+    wait(50, msec);
+    Drivetrain.turnFor(-130, deg);
+    wait(50, msec);
+    lilWillToggle();
+    intakeStore();
+    wait(50, msec);
+    Drivetrain.setDriveVelocity(25, pct);
+    Drivetrain.drive(forward);
+    wait(900, msec);
+    Drivetrain.stop();
+    wait(350, msec);
+    intakeStop();
+    drive.driveTo(-20, 45);
+    
+    wait(50, msec);
+    lilWillToggle();
+    allignerToggle();
+    Drivetrain.setDriveVelocity(30, pct);
+    Drivetrain.turnFor(-180, deg);
+    wait(50, msec);
+    Drivetrain.drive(forward);
+    wait(400, msec);
+    Drivetrain.stop();
+    intakeScoreTop();
+    wait(750, msec);
+    intakeStop();
+    wait(350, msec);
     intakeScoreTop();
     wait(2000, msec);
     intakeStop();
