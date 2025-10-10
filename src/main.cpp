@@ -39,46 +39,35 @@ void pre_auton(void) {
   autonSelector(); // Display and handle autonomous routine selection
 }
 
-// Autonomous function: runs during the autonomous period of the match
 void autonomous(void) {
   Drivetrain.setTurnVelocity(25, pct);
-  PIDDrive drive; // Create a PIDDrive object for precise driving
-  // Select and run the appropriate autonomous routine based on user selection
+  PIDDrive drive;
   switch (autonSelection) {
     case 0:
-      // Red Left Autonomous
       autonomous1();
       break;
     case 1:
-      // Red Right Autonomous
       autonomous2();
       break;
     case 2:
-      // Blue Left Autonomous
       autonomous3();
       break;
     case 3:
-      // Blue Right Autonomous
       autonomous4();
       break;
     case 4:
-      // Skills Autonomous
       autonomous5();
       break;
     case 5:
-      // Programming Skills Autonomous
       autonomous6();
       break;
     case 6:
-      // Test Autonomous 1
       autonomous7();
       break;
     case 7:
-      // Test Autonomous 2
       autonomous8();
       break;
     case 8:
-      // Skip Autonomous: do nothing
       break;
     default:
       // If no valid selection, do nothing
@@ -111,8 +100,9 @@ void usercontrol(void) {
     inputCurve(); // Apply input curve to joystick for smoother driving
 
     // Map controller buttons to intake functions
-    Controller.ButtonY.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
+    //Controller.ButtonY.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
     Controller.ButtonRight.pressed(allignerToggle);
+    Controller.ButtonY.pressed(switchAllignerLoader);
     Controller.ButtonDown.pressed(pusherToggle);
 
     // Intake control logic based on button presses
