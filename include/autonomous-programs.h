@@ -9,42 +9,45 @@ void autonomous1() { //LeftLG
     drive.driveTo(30);
     wait(50, msec);
     Drivetrain.turnFor(-30, deg);
+    
     intakeStore();
     wait(50, msec);
-    drive.driveTo(18, 15); //intake set of 3 blocks
+    drive.driveTo(18, 15);
     wait(150, msec);
     drive.driveTo(-4, 20);
     intakeStop();
+    
     wait(50, msec);
     Drivetrain.turnFor(-85, deg);
     wait(50, msec);
-
-    drive.driveTo(34, 55); //drive toward match loader
+    drive.driveTo(34, 55);
     wait(50, msec);
     Drivetrain.turnFor(-41, deg);
     wait(50, msec);
+    
     lilWillToggle();
     intakeStore();
     wait(50, msec);
     Drivetrain.setDriveVelocity(25, pct);
-    Drivetrain.drive(forward); //drive into match loader
+    Drivetrain.drive(forward);
     wait(1000, msec);
     Drivetrain.stop();
     wait(450, msec);
     intakeStop();
-    drive.driveTo(-20, 45); //drive out of match loader
+    drive.driveTo(-20, 45);
     
     wait(50, msec);
     lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(180, deg); //turn toward long goal
+    Drivetrain.turnFor(180, deg);
     wait(50, msec);
-    Drivetrain.drive(forward); //drive into long goal
+    Drivetrain.drive(forward);
     wait(400, msec);
     Drivetrain.stop();
+    
     intakeScoreTop();
-    wait(1250, msec); //score into long goal, then unjam, then score again
+    wait(1250, msec);
     intakeOuttake();
     wait(200, msec);
     intakeScoreTop();
