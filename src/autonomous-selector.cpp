@@ -4,8 +4,8 @@
 int autonSelection = 0;
 // Array of autonomous routine names for display
 const char* autonNames[9] = {
-  "Red Left", "Red Right", "Blue Left", "Blue Right",
-  "Skills", "Prog Skills", "Test 1", "Test 2", "SKIP AUTON"
+  "LeftLG", "LeftAWP", "RightLG", "RightAWP",
+  "Skills1", "Skills2", "Test 1", "Test 2", "SKIP AUTON"
 };
 
 // drawAutonSelector

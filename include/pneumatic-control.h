@@ -1,7 +1,22 @@
 #include "robot-config.h"
 
-// Toggles the state of the Match Loader Emptying Mechanism
 void lilWillToggle() {
   lilWill.set(!lilWill.value());
-  Brain.Screen.print("lilWill toggled\n");
+}
+
+void allignerToggle() {
+  alligner.set(!alligner.value());
+}
+
+void pusherToggle() {
+  pusher.set(!pusher.value());
+}
+
+void switchAllignerLoader() {
+  if (lilWill.value()==0 && alligner.value()==0) {
+    lilWill.set(1);
+  } else {
+    alligner.set(!alligner.value());
+    lilWill.set(!lilWill.value());
+  }
 }
