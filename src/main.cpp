@@ -7,36 +7,23 @@
 //                                                                           
 //----------------------------------------------------------------------------
 
-// Include the main VEX library for hardware control and competition functions
 #include "vex.h"
-// Include cmath for mathematical functions (e.g., abs, pow, sqrt)
 #include <cmath>
-// Include custom robot configuration header (motors, sensors, etc.)
 #include "robot-config.h"
-// Include intake control logic (intake motors, scoring, etc.)
 #include "intake-control.h"
-// Include drive control logic (drivetrain, joystick mapping, etc.)
 #include "drive-control.h"
-// Include miscellaneous helper functions
 #include "random-functions.h"
-// Include pneumatic control logic (pistons, solenoids, etc.)
 #include "pneumatic-control.h"
-// Include PID setup and control logic for precise movement
 #include "pid-setup.h"
-// Include autonomous routines for competition
 #include "autonomous-programs.h"
-// Include autonomous routine selector logic
 #include "autonomous-selector.h"
 
 using namespace vex;
 
-// Create a global instance of the competition class to manage match phases
 competition Competition;
 
-// Pre-autonomous function: runs before autonomous and user control
-// Used to initialize robot and select autonomous routine
 void pre_auton(void) {
-  autonSelector(); // Display and handle autonomous routine selection
+  autonSelector();
 }
 
 void autonomous(void) {
@@ -70,22 +57,12 @@ void autonomous(void) {
     case 8:
       break;
     default:
-      // If no valid selection, do nothing
+
       break;
   }
 }
 
 
-
-/*void turn180() {
-  Brain.Timer.clear();
-  Drivetrain.turnFor(260, deg);
-  double TimerValue = Brain.Timer.time();
-  Brain.Screen.print(TimerValue);
-} */
-
-
-// User control function: runs during the driver control period
 void usercontrol(void) {
   printTeamLogo();
   Drivetrain.setStopping(brake);
@@ -95,47 +72,34 @@ void usercontrol(void) {
   IntakeMotor3.setStopping(brake);
 
 
-  // Main driver control loop: runs repeatedly during user control
   while (1) {
-    inputCurve(); // Apply input curve to joystick for smoother driving
-
-    // Map controller buttons to intake functions
-    //Controller.ButtonY.pressed(lilWillToggle); // Toggles the Match Loader Emptying Mechanism
+    inputCurve();
     Controller.ButtonRight.pressed(allignerToggle);
     Controller.ButtonY.pressed(switchAllignerLoader);
     Controller.ButtonDown.pressed(pusherToggle);
 
-    // Intake control logic based on button presses
     if (Controller.ButtonR1.pressing()) {
-      intakeScoreTop(); // Score in the top goal
+      intakeScoreTop();
     } else if (Controller.ButtonL1.pressing()) {
-      intakeScoreMiddle(); // Score in the middle goal
+      intakeScoreMiddle(); 
     } else if (Controller.ButtonL2.pressing()) {
-      intakeScoreBottom(); // Score in the bottom goal
+      intakeScoreBottom(); 
     } else if (Controller.ButtonR2.pressing()) {
-      intakeStore(); // Store game elements
+      intakeStore(); 
     } else if (Controller.ButtonB.pressing()) {
       intakeOuttake();
     } else {
-      intakeStop(); // Stop intake if no buttons are pressed
+      intakeStop(); 
     }
 
-    /*if (Controller.ButtonA.pressing()) {
-      turn180();
-    }*/
-
-    // Wait 20 milliseconds to prevent wasted CPU resources
     wait(20, msec); // Sleep the task for a short amount of time to prevent wasted resources.
   }
 }
 
-// Main function: entry point for the program
 int main() {
-  // Set up callbacks for autonomous and driver control periods.
-  Competition.autonomous(autonomous); // Register autonomous function
-  Competition.drivercontrol(usercontrol); // Register user control function
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
 
-  // Run the pre-autonomous function (setup and auton selection)
   pre_auton();
 
   // Prevent main from exiting by running an infinite loop
