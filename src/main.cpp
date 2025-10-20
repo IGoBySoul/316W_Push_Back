@@ -17,61 +17,67 @@
 #include "pid-setup.h"
 #include "autonomous-programs.h"
 #include "autonomous-selector.h"
+#include "gifclass.h"
 
 using namespace vex;
 
 competition Competition;
 
-void pre_auton(void) {
-  autonSelector();
+// Only declare the Gif object globally so you can control its lifetime
+vex::Gif* gif = nullptr;
+
+// Helper to check if VEXnet/competition switch is connected
+bool isCompetitionConnected() {
+  return Competition.isFieldControl() || Competition.isCompetitionSwitch();
 }
 
-void autonomous(void) {
-  Drivetrain.setTurnVelocity(25, pct);
-  PIDDrive drive;
-  switch (autonSelection) {
-    case 0:
-      autonomous1();
-      break;
-    case 1:
-      autonomous2();
-      break;
-    case 2:
-      autonomous3();
-      break;
-    case 3:
-      autonomous4();
-      break;
-    case 4:
-      autonomous5();
-      break;
-    case 5:
-      autonomous6();
-      break;
-    case 6:
-      autonomous7();
-      break;
-    case 7:
-      autonomous8();
-      break;
-    case 8:
-      break;
-    default:
-
-      break;
+void pre_auton(void) {
+  // Stop and delete the gif if it exists, so autonSelector can use the screen
+  /*if (gif != nullptr) {
+    delete gif;
+    gif = nullptr;
+  }*/
+  // Only show auton selector if VEXnet/competition switch is connected
+  if (isCompetitionConnected()) {
+    autonSelector();
   }
 }
 
+void autonomous(void) {
+  // Make sure GIF is not running during autonomous
+  /*if (gif != nullptr) {
+    delete gif;
+    gif = nullptr;
+  }*/
+  Drivetrain.setTurnVelocity(25, pct);
+  PIDDrive drive;
+  switch (autonSelection) {
+    case 0: autonomous1(); break;
+    case 1: autonomous2(); break;
+    case 2: autonomous3(); break;
+    case 3: autonomous4(); break;
+    case 4: autonomous5(); break;
+    case 5: autonomous6(); break;
+    case 6: autonomous7(); break;
+    case 7: autonomous8(); break;
+    case 8: break;
+    default: break;
+  }
+}
 
 void usercontrol(void) {
-  printTeamLogo();
+  // Start the GIF display only in driver control
+  /*if (gif == nullptr) {
+    gif = new vex::Gif("world.gif", 120, 0);
+  }*/
+
   Drivetrain.setStopping(brake);
   Drivetrain.setTurnVelocity(100, percent);
   IntakeMotor1.setStopping(brake);
   IntakeMotor2.setStopping(brake);
   IntakeMotor3.setStopping(brake);
 
-
+  //int count = 0;
   while (1) {
     inputCurve();
     Controller.ButtonRight.pressed(allignerToggle);
@@ -92,7 +98,7 @@ void usercontrol(void) {
       intakeStop(); 
     }
 
-    wait(20, msec); // Sleep the task for a short amount of time to prevent wasted resources.
+    wait(20, msec);
   }
 }
 
@@ -104,6 +110,6 @@ int main() {
 
   // Prevent main from exiting by running an infinite loop
   while (true) {
-    wait(100, msec); // Sleep to save resources
+    wait(100, msec);
   }
 }

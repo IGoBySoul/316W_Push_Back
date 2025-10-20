@@ -72,16 +72,16 @@ void autonomous3() { //RightLG
     Drivetrain.turnFor(85, deg);
     wait(50, msec);
 
-    drive.driveTo(34, 55); //drive toward match loader
+    drive.driveTo(36, 55); //drive toward match loader
     wait(50, msec);
-    Drivetrain.turnFor(41, deg);
+    Drivetrain.turnFor(36, deg);
     wait(50, msec);
     lilWillToggle();
     intakeStore();
     wait(50, msec);
     Drivetrain.setDriveVelocity(25, pct);
     Drivetrain.drive(forward); //drive into match loader
-    wait(1000, msec);
+    wait(900, msec);
     Drivetrain.stop();
     wait(450, msec);
     intakeStop();
@@ -114,16 +114,16 @@ void autonomous4() { //rightAWP
     wait(50, msec);
     drive.driveTo(18, 15); //intake set of 3 blocks
     wait(150, msec);
-    drive.driveTo(-4, 20); //allign with middle goal
+    drive.driveTo(-5.5, 20); //allign with middle goal
     intakeStop();
     wait(50, msec);
-    Drivetrain.turnFor(-70, deg);
+    Drivetrain.turnFor(-66, deg);
     wait(50, msec);
-    drive.driveTo(15, 20); //drive into middle goal
+    drive.driveTo(15.5, 20); //drive into middle goal
     intakeScoreBottom(); //score into middle goal
     wait(1000, msec);
     intakeStop();
-    drive.driveTo(-48, 55); //drive toward match loader
+    drive.driveTo(-51.5, 55); //drive toward match loader
     wait(50, msec);
     Drivetrain.turnFor(-130, deg);
     wait(50, msec);
@@ -157,11 +157,110 @@ void autonomous4() { //rightAWP
 }
 
 // Autonomous routine for Skills challenge
-void autonomous5() {  //skills
+void autonomous5() {  //skills1
+    Drivetrain.setTurnVelocity(20, pct);
+    drive.driveTo(34.25, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(90, deg);
+    lilWillToggle();
+    wait(200, msec);
+    intakeStore();
+    Drivetrain.setDriveVelocity(30, pct);
+    Drivetrain.drive(forward);
+    wait(500, msec);
+    Drivetrain.stop();
+    wait(2500, msec);
+    drive.driveTo(-20, 35);
+    intakeStop();
+    switchAllignerLoader();
+    wait(50, msec);
+    Drivetrain.turnFor(169, deg);
+    wait(50, msec);
+    Drivetrain.drive(forward);
+    wait(500, msec);
+    Drivetrain.stop();
+    intakeScoreTop();
+    wait(2000, msec);
+    intakeOuttake();
+    wait(200, msec);
+    intakeScoreTop();
+    wait(2000, msec);
+    intakeStop();
+
+    drive.driveTo(-7, 35);
+    wait(100, msec);
+    Drivetrain.turnFor(-85, deg);
+    wait(100, msec);
+    drive.driveTo(103.75, 35);
+    wait(50, msec);
+    switchAllignerLoader();
+    wait(100, msec);
+    Drivetrain.turnFor(-90, deg);
+    intakeStore();
+    Drivetrain.drive(forward);
+    wait(650, msec);
+    Drivetrain.stop();
+    wait(2500, msec);
+    drive.driveTo(-20, 35);
+    intakeStop();
+    switchAllignerLoader();
+    wait(50, msec);
+    Drivetrain.turnFor(175, deg);
+    wait(50, msec);
+    Drivetrain.drive(forward);
+    wait(500, msec);
+    Drivetrain.stop();
+    intakeScoreTop();
+    wait(1000, msec);
+    intakeOuttake();
+    wait(250, msec);
+    intakeScoreTop();
+    wait(2000, msec);
+    intakeStop();
+
+    drive.driveTo(-7, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(85, deg);
+    wait(50, msec);
+    drive.driveTo(15, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(-85, deg);
+    wait(50, msec);
+    drive.driveTo(80, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(-85, deg);
+    wait(50, msec);
+    drive.driveTo(13.25, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(90, deg);
+    wait(50, msec);
+    switchAllignerLoader();
+    intakeStore();
+    wait(100, msec);
+    Drivetrain.drive(forward);
+    wait(700, msec);
+    Drivetrain.stop();
+    wait(2500, msec);
+    drive.driveTo(-20, 35);
+    intakeStop();
+    switchAllignerLoader();
+    wait(50, msec);
+    Drivetrain.turnFor(175, deg);
+    wait(50, msec);
+    Drivetrain.drive(forward);
+    wait(500, msec);
+    Drivetrain.stop();
+    intakeScoreTop();
+    wait(1000, msec);
+    intakeOuttake();
+    wait(250, msec);
+    intakeScoreTop();
+    wait(2000, msec);
+    intakeStop();
 }
 
 // Autonomous routine for Programming Skills challenge
-void autonomous6() {  //progSkills
+void autonomous6() {  //skills2
 }
 
 // Autonomous routine for Test 1
