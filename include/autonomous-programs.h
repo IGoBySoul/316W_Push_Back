@@ -6,31 +6,28 @@ PIDDrive drive;
 
 // Autonomous routine for Red Left start position
 void autonomous1() { //LeftLG
-    drive.driveTo(30);
-    wait(50, msec);
-    Drivetrain.turnFor(-30, deg);
+    Drivetrain.setTurnVelocity(20, pct);
     intakeStore();
-    wait(50, msec);
-    drive.driveTo(18, 15); //intake set of 3 blocks
+    drive.driveTo(32.5, 10); //intake set of 3 blocks
     wait(150, msec);
-    drive.driveTo(-4, 20);
-    intakeStop();
+    drive.driveTo(-2.5, 20);
     wait(50, msec);
-    Drivetrain.turnFor(-85, deg);
+    Drivetrain.turnFor(-105, deg);
     wait(50, msec);
 
-    drive.driveTo(34, 55); //drive toward match loader
+    drive.driveTo(34, 40); //drive toward match loader
     wait(50, msec);
-    Drivetrain.turnFor(-41, deg);
+    intakeStop();
+    Drivetrain.turnFor(120, deg);
+    wait(200, msec);
+    allignerToggle();
+    /*intakeStore();
     wait(50, msec);
-    lilWillToggle();
-    intakeStore();
-    wait(50, msec);
-    Drivetrain.setDriveVelocity(25, pct);
+    Drivetrain.setDriveVelocity(30, pct);
     Drivetrain.drive(forward); //drive into match loader
-    wait(1000, msec);
+    wait(775, msec);
     Drivetrain.stop();
-    wait(450, msec);
+    wait(550, msec);
     intakeStop();
     drive.driveTo(-20, 45); //drive out of match loader
     
@@ -38,18 +35,34 @@ void autonomous1() { //LeftLG
     lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(180, deg); //turn toward long goal
-    wait(50, msec);
+    Drivetrain.turnFor(183, deg); //turn toward long goal
+    wait(50, msec);*/
+    Drivetrain.setDriveVelocity(25, pct);
     Drivetrain.drive(forward); //drive into long goal
-    wait(400, msec);
+    wait(500, msec);
     Drivetrain.stop();
     intakeScoreTop();
     wait(1250, msec); //score into long goal, then unjam, then score again
     intakeOuttake();
     wait(200, msec);
     intakeScoreTop();
-    wait(2000, msec);
+    wait(1250, msec);
     intakeStop();
+
+    //super special tech:
+
+    drive.driveTo(-8, 30);
+    pusherToggle();
+    wait(50, msec);
+    Drivetrain.turnFor(-45, deg);
+    wait(50, msec);
+    drive.driveTo(15.4, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(46, deg);
+    wait(100, msec);
+    drive.driveTo(8);
+    pusherToggle();
+    drive.driveTo(16);
 }
 
 // Autonomous routine for Red Right start position
@@ -59,31 +72,32 @@ void autonomous2() { //LeftAWP
 
 
 void autonomous3() { //RightLG
+    Drivetrain.setTurnVelocity(20, pct);
     drive.driveTo(30);
     wait(50, msec);
-    Drivetrain.turnFor(30, deg);
+    Drivetrain.turnFor(26.5, deg);
     intakeStore();
     wait(50, msec);
-    drive.driveTo(18, 15); //intake set of 3 blocks
+    drive.driveTo(16.5, 10); //intake set of 3 blocks
     wait(150, msec);
-    drive.driveTo(-4, 20);
-    intakeStop();
+    drive.driveTo(-2.5, 20);
     wait(50, msec);
     Drivetrain.turnFor(85, deg);
     wait(50, msec);
 
-    drive.driveTo(36, 55); //drive toward match loader
+    drive.driveTo(31, 40); //drive toward match loader
     wait(50, msec);
-    Drivetrain.turnFor(36, deg);
+    intakeStop();
+    Drivetrain.turnFor(-123, deg);
+    wait(200, msec);
+    allignerToggle();
+    /*intakeStore();
     wait(50, msec);
-    lilWillToggle();
-    intakeStore();
-    wait(50, msec);
-    Drivetrain.setDriveVelocity(25, pct);
+    Drivetrain.setDriveVelocity(30, pct);
     Drivetrain.drive(forward); //drive into match loader
-    wait(900, msec);
+    wait(775, msec);
     Drivetrain.stop();
-    wait(450, msec);
+    wait(550, msec);
     intakeStop();
     drive.driveTo(-20, 45); //drive out of match loader
     
@@ -91,18 +105,36 @@ void autonomous3() { //RightLG
     lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(-180, deg); //turn toward long goal
-    wait(50, msec);
+    Drivetrain.turnFor(183, deg); //turn toward long goal
+    wait(50, msec);*/
+    Drivetrain.setDriveVelocity(25, pct);
     Drivetrain.drive(forward); //drive into long goal
-    wait(400, msec);
+    wait(600, msec);
     Drivetrain.stop();
     intakeScoreTop();
     wait(1250, msec); //score into long goal, then unjam, then score again
     intakeOuttake();
     wait(200, msec);
     intakeScoreTop();
-    wait(2000, msec);
+    wait(1750, msec);
     intakeStop();
+
+    //super special tech:
+
+    drive.driveTo(-8, 30);
+    pusherToggle();
+    wait(50, msec);
+    Drivetrain.turnFor(-45, deg);
+    wait(50, msec);
+    drive.driveTo(15.4, 35);
+    wait(50, msec);
+    Drivetrain.turnFor(45, deg);
+    wait(100, msec);
+    drive.driveTo(6);
+    pusherToggle();
+    drive.driveTo(20, 30);
+
+
 }
 
 
@@ -112,9 +144,9 @@ void autonomous4() { //rightAWP
     Drivetrain.turnFor(30, deg);
     intakeStore();
     wait(50, msec);
-    drive.driveTo(18, 15); //intake set of 3 blocks
+    drive.driveTo(16.5, 10); //intake set of 3 blocks
     wait(150, msec);
-    drive.driveTo(-5.5, 20); //allign with middle goal
+    drive.driveTo(-4, 20); //allign with middle goal
     intakeStop();
     wait(50, msec);
     Drivetrain.turnFor(-66, deg);
@@ -124,7 +156,7 @@ void autonomous4() { //rightAWP
     wait(1000, msec);
     intakeStop();
     drive.driveTo(-51.5, 55); //drive toward match loader
-    wait(50, msec);
+    /*wait(50, msec);
     Drivetrain.turnFor(-130, deg);
     wait(50, msec);
     lilWillToggle();
@@ -137,13 +169,17 @@ void autonomous4() { //rightAWP
     wait(400, msec);
     intakeStop();
     drive.driveTo(-20, 45);
-    
+    */
+
+
+    Drivetrain.turnFor(-50, deg);
+
+
     wait(50, msec);
-    lilWillToggle();
+    //lilWillToggle();
     allignerToggle();
     Drivetrain.setDriveVelocity(30, pct);
-    Drivetrain.turnFor(-180, deg); // allign with long goal
-    wait(50, msec);
+    wait(250, msec);
     Drivetrain.drive(forward); //drive into long goal
     wait(400, msec);
     Drivetrain.stop();
@@ -158,7 +194,7 @@ void autonomous4() { //rightAWP
 
 // Autonomous routine for Skills challenge
 void autonomous5() {  //skills1
-    Drivetrain.setTurnVelocity(20, pct);
+    Drivetrain.setTurnVelocity(20, pct); 
     drive.driveTo(34.25, 35);
     wait(50, msec);
     Drivetrain.turnFor(90, deg);
@@ -174,7 +210,7 @@ void autonomous5() {  //skills1
     intakeStop();
     switchAllignerLoader();
     wait(50, msec);
-    Drivetrain.turnFor(169, deg);
+    Drivetrain.turnFor(172.5, deg);
     wait(50, msec);
     Drivetrain.drive(forward);
     wait(500, msec);
@@ -191,7 +227,7 @@ void autonomous5() {  //skills1
     wait(100, msec);
     Drivetrain.turnFor(-85, deg);
     wait(100, msec);
-    drive.driveTo(103.75, 35);
+    drive.driveTo(100, 35);
     wait(50, msec);
     switchAllignerLoader();
     wait(100, msec);
@@ -226,11 +262,13 @@ void autonomous5() {  //skills1
     wait(50, msec);
     Drivetrain.turnFor(-85, deg);
     wait(50, msec);
+    intakeStore();
     drive.driveTo(80, 35);
     wait(50, msec);
     Drivetrain.turnFor(-85, deg);
     wait(50, msec);
-    drive.driveTo(13.25, 35);
+    intakeStop();
+    drive.driveTo(8, 35);
     wait(50, msec);
     Drivetrain.turnFor(90, deg);
     wait(50, msec);
